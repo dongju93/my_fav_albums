@@ -1,6 +1,74 @@
 {% extends 'layout.html' %}
+
 {% block title %}{% endblock %}
+
 {% block content %}
-<h1>{{ title }}</h1>
-   Welcome to {{ title }}
+<section class="jumbotron text-xs-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">{{ title }}</h1>
+        <p class="lead text-muted">{{ callToAction }}</p>
+        <p>
+            <a href="#" class="btn btn-info" data-toggle="modal" data-target="#createArtists">Insert your Favorite Album</a>
+            <a href="/artists" class="btn btn-secondary">View Full List Albums</a>
+        </p>
+    </div>
+</section>
+<div class="album text-muted">
+    <div class="container">
+        <div class="row">
+            {% for artist in artists %}
+                <div class="card col-lg-4">
+                    <h2 class="text-lg-center">{{ artist.name }}</h2>
+                    {% if artist.album == null %}
+                    <img src="https://placehold.it/320x320" alt="{{ artist.name }}" style="height: 320px; width: 100%; display: block;">
+                    {% endif %}
+                    {% if artist.album %}
+                    <img src="{{ artist.album }}" width="100%" height="320px">
+                    {% endif %}
+                    <p class="card-text">{{ artist.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="createArtists" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="/artists" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Insert an Album</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <fieldset class="form-group">
+                        <label  for="inputname">Artist Name</label>
+                        <input type="text" id="inputname" name="name" class="form-control" placeholder="Artist name" required="">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label  for="inputdescription">Description</label>
+                        <textarea id="nputdescription" name="description" rows="8" cols="40" class="form-control" placeholder="Description" required=""></textarea>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label  for="inputalbum">Best Album</label>
+                        <input type="text" id="inputalbum" name="album" rows="8" cols="40" class="form-control" placeholder="Link to Album cover"></textarea>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label  for="inputyear">Release Year</label>
+                        <input type="text" id="inputyear" name="year" rows="8" cols="40" class="form-control" placeholder="Year" required=""></textarea>
+                    </fieldset>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

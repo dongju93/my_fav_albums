@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      {% include "../partials/head.html" %}
-   </head>
-   <body>
-      {% block content %}
-      {% endblock %}
-      {% include "../partials/footer.html" %}
-   </body>
+<head>
+    {% include "../partials/head.html" %}
+</head>
+<body>
+    <div class="navbar-collapse inverse collapse" id="navbar-header" aria-expanded="false" style="height: 0px;">
+        <div class="container-fluid">
+            <div class="about">
+                <h4>About</h4>
+                <p class="text-muted">첫 화면에선 index 컨트롤러에 저장된 기본 형태의 response JS를 보여주고, Insert Ablum 버튼을 통해 자신만의 앨범을 등록, 해당 데이터는 MySQL에 직접적으로 저장되며, View Albums 버튼을 통해 이동한 페이지에서는 MySQL에 저장된 DB를 조회에서 생성된 날짜별로 정렬 후 보여준다.</p>
+            </div>
+            <div class="social">
+                <h4>Contact</h4>
+                <ul class="list-unstyled">
+                    <li><a href="https://github.com/dongju93">Follow on Github</a></li>
+                    <li><a href="https://www.instagram.com/tls2323/">Like on Instagram</a></li>
+                    <li><a href="spdlqj011@gmail.com"">Email me</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-static-top bg-dark">
+        <div class="container-right">
+            <a href="/" class="navbar-brand">MVC MySql App</a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-header" aria-expanded="false">
+                ☰
+            </button>
+            
+        </div>
+    </div>
+
+            {% block content %}
+            {% endblock %}
+
+    <footer class="text-muted">
+        <div class="container">
+            <p class="pull-xs-right">
+                <a href="#">Back to top</a>
+            </p>
+            <p>My personal favorite album of all time.</p>
+            <p>Find more music at <a href="https://www.apple.com/kr/apple-music/">Apple Music</a>.</p>
+        </div>
+    </footer>
+
+    {% include "../partials/footer.html" %}
+</body>
 </html>

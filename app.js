@@ -7,6 +7,9 @@ var swig = require('swig');
 
 var indexRouter = require('./controllers/index');
 
+var artists = require('./controllers/Artist');
+var users = require('./controllers/User');
+
 var app = express();
 
 // view engine setup
@@ -22,7 +25,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter.show);
+app.get('/', indexRouter.show);
+
+app.get('/artists', artists.list);
+app.get('/artist/:id', artists.byId);
+app.post('/artists', artists.create);
+app.put('/artist/:id', artists.update);
+app.delete('/artist/:id', artists.delete);
+
+app.get('/users', users.list);
+app.post('/users', users.create);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
